@@ -1,20 +1,19 @@
 import classNames from 'classnames';
 
-export const Person = ({ person }) => (
-  <section className="Person">
-    <h2 className="Person__name">My name is {person.name}</h2>
-    <p className={classNames('', { Person__age: person.age })}>
-      {person.age ? <p>I am {person.age}</p> : <></>}
-    </p>
-    <p className={classNames('', { Person__partner: person.partnerName })}>
-      {person.isMarried === true ? (
-        <p>
-          {person.partnerName} is my
-          {person.sex === 'm' ? ' wife' : ' husband'}
-        </p>
-      ) : (
-        <p>I am not married</p>
-      )}
-    </p>
-  </section>
-);
+export const Person = ({ person }) => {
+  const { name, age, sex, isMarried, partnerName } = person;
+  const partner = sex === 'm' ? ' wife' : ' husband';
+
+  return (
+    <section className="Person">
+      <h2 className="Person__name">My name is {name}</h2>
+      <p className={classNames('', { Person__age: age })}>
+        {age ? <p>I am {age}</p> : <></>}
+      </p>
+
+      <p className={classNames('', { Person__partner: partnerName })}>
+        {isMarried ? `${partnerName} is my ${partner}` : `I am not married`}
+      </p>
+    </section>
+  );
+};
